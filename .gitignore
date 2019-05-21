@@ -8,3 +8,6 @@ ssl
 .idea
 nbproject
 npm-debug.log
+local.js
+runner.js
+.vscode

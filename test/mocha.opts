@@ -1,0 +1,5 @@
+--timeout 15000
+--recursive
+
+--reporter spec
+./test/unit/**/*.js

@@ -1,17 +1,17 @@
 {
   "name": "sails-sqlserver",
-  "version": "0.10.10",
-  "description": "Official SQL Server Adapter for Sails / Waterline",
+  "version": "0.13.14",
+  "description": "SQL Server Adapter for Sails / Waterline",
   "main": "lib/adapter.js",
   "scripts": {
-    "test": "node test/integration/runner -R spec -b"
+    "test": "node test/integration/runner -R spec -b",
+    "unit-test": "mocha || echo completed"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/cnect/sails-sqlserver.git"
+    "url": "git://github.com/intel/sails-mssql.git"
   },
   "keywords": [
-    "cnect",
     "sails",
     "sails-mssql",
     "sails-sqlserver",
@@ -22,10 +22,9 @@
     "adapter",
     "waterline",
     "sails.js",
-    "mssql",
-    "sqlserver"
+    "mssql"
   ],
-  "author": "Travis Webb <tjwebb@cnectdata.com>",
+  "author": "dave preston <drpresto@yahoo.com>",
   "contributors": [
     "balderdashy",
     "Stuart Welham",
@@ -36,29 +35,33 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "captains-log": "^1.0.2",
-    "lodash": "^4.17.4",
-    "mssql": "^4.0.1",
-    "underscore.string": "^3.0.0",
-    "waterline-cursor": "0.0.7"
+    "bluebird": "^3.5.1",
+    "chai": "^4.1.2",
+    "lodash": "^4.17.5",
+    "moment": "^2.20.1",
+    "mssql": "^4.1.0",
+    "underscore.string": "^3.0.0"
   },
-  "bundledDependencies": [
-    "lodash",
-    "mssql",
-    "underscore.string",
-    "waterline-cursor"
-  ],
   "devDependencies": {
-    "waterline-adapter-tests": "git://github.com/tjwebb/waterline-adapter-tests",
-    "mocha": "*"
+    "captains-log": "^0.11.11",
+    "mocha": "*",
+    "proxyquire": "^2.1.0",
+    "waterline-adapter-tests": "^0.12.1"
   },
   "waterlineAdapter": {
-    "type": "sails-sqlserver",
+    "type": "sails-mssql",
     "interfaces": [
       "semantic",
+      "associations",
       "queryable",
-      "associations"
+      "sql"
     ],
     "waterlineVersion": "~0.10.0"
-  }
+  },
+  "possibleinterfaces": [
+    "semantic",
+    "associations",
+    "queryable",
+    "sql"
+  ]
 }
