@@ -11,3 +11,4 @@ npm-debug.log
 local.js
 runner.js
 .vscode
+.npmrc
