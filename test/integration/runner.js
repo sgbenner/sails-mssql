@@ -41,6 +41,7 @@ console.log();
 
 var mssql = require('mssql');
 var config = {
+  url: local.MSSQL_URL,
   user: process.env.MSSQL_USER || local.MSSQL_USER,
   password: process.env.MSSQL_PASSWORD || local.MSSQL_PASSWORD,
   server: process.env.MSSQL_HOST || local.MSSQL_HOST,
@@ -86,7 +87,7 @@ var connection = new mssql.ConnectionPool(config, function (err) {
 
       mocha: {
         reporter: 'spec',
-        timeout: 300 * 1000
+        timeout: process.env.MOCHA_TIMEOUT || 30 * 1000
       },
 
       // Load the adapter module.

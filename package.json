@@ -1,6 +1,6 @@
 {
   "name": "sails-mssql",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "SQL Server Adapter for Sails / Waterline",
   "main": "lib/adapter.js",
   "scripts": {
@@ -46,7 +46,7 @@
     "captains-log": "^0.11.11",
     "mocha": "*",
     "proxyquire": "^2.1.0",
-    "waterline-adapter-tests": "^0.12.1"
+    "waterline-adapter-tests": "^1.0.1"
   },
   "waterlineAdapter": {
     "type": "sails-mssql",
@@ -54,14 +54,16 @@
       "semantic",
       "associations",
       "queryable",
-      "sql"
+      "sql",
+      "migratable"
     ],
-    "waterlineVersion": "~0.10.0"
+    "waterlineVersion": "~0.13.0"
   },
   "possibleinterfaces": [
     "semantic",
     "associations",
     "queryable",
-    "sql"
+    "sql",
+    "migratable"
   ]
 }
