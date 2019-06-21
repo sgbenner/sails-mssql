@@ -14,7 +14,12 @@ var log = new (require('captains-log'))();
 var TestRunner = require('waterline-adapter-tests');
 var Adapter = require('../../lib/adapter.js');
 
-var local = require('../../local.js');
+try {
+  require('../../local.js');
+}
+catch (error) {
+  log.warn('No local.js found. make sure you have an environment variable called WATERLINE_ADAPTER_TESTS_URL with the connection info for you DB.')
+}
 
 // Grab targeted interfaces from this adapter's `package.json` file:
 var package = {};
@@ -41,14 +46,7 @@ console.log();
 
 var mssql = require('mssql');
 var config = {
-  user: process.env.MSSQL_USER || local.MSSQL_USER,
-  password: process.env.MSSQL_PASSWORD || local.MSSQL_PASSWORD,
-  server: process.env.MSSQL_HOST || local.MSSQL_HOST,
-  database: process.env.MSSQL_DATABASE || local.MSSQL_DATABASE,
-  port: process.env.MSSQL_PORT || local.MSSQL_PORT,
-  options: {
-    encrypt: true
-  },
+  url: process.env.WATERLINE_ADAPTER_TESTS_URL,
   timeout: 300 * 1000,
   pool: {
     max: 100
@@ -57,7 +55,7 @@ var config = {
 };
 
 console.log('Dropping any existing tables...');
-var connection = new mssql.ConnectionPool(config, function (err) {
+var connection = new mssql.ConnectionPool(process.env.WATERLINE_ADAPTER_TESTS_URL, function (err) {
   if (err) throw err;
 
   new mssql.Request(connection).query([
@@ -86,7 +84,7 @@ var connection = new mssql.ConnectionPool(config, function (err) {
 
       mocha: {
         reporter: 'spec',
-        timeout: 300 * 1000
+        timeout: process.env.MOCHA_TIMEOUT || 30 * 1000
       },
 
       // Load the adapter module.

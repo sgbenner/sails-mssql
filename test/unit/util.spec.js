@@ -127,6 +127,10 @@ describe('util stuffs', function () {
     expect(util.parseWherePhrase({ tableAs: 'team', where: { name: 'bob', count: 3 } }))
       .to.equal(`[team].[name] = 'bob' AND [team].[count] = 3`);
   });
+  it('should handle "and" in waterline query as an AND clause', function () {
+    expect(util.parseWherePhrase({ tableAs: 'team', where: { and: [{ name: 'bob' }, { count: 3 }] } }))
+      .to.equal(`(([team].[name] = 'bob') AND ([team].[count] = 3))`);
+  });
   it('should convert <', function () {
     expect(util.parseWherePhrase({ tableAs: 'team', where: { count: { '<': 3 } } }))
       .to.equal(`[team].[count] < 3`)
